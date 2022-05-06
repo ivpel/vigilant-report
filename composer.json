@@ -1,0 +1,21 @@
+{
+    "name": "ivpel/vigilant-reporter",
+    "type": "project",
+    "license": "GPLv3",
+    "autoload": {
+        "psr-4": {
+            "Ivpel\\VigilantReporter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ivpel",
+            "email": "ivan.pelykh@protonmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^6.0",
+        "twig/twig": "^3.0",
+        "symfony/dom-crawler": "^6.0"
+    }
+}

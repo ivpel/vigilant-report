@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites disabled="0" errors="0" failures="0" name="First Suite" tests="3" time="62.46">
+
+    <testsuite disabled="0" errors="0" failures="0" hostname="test" id="" name="name_test" package="_test_package" skipped="0" tests="4" time="45.55" timestamp="16:22">
+        <properties>
+            <property name="Property Test Name" value="Property_Value"/>
+        </properties>
+
+        <testcase assertions="5" classname="test_class_name" name="test_name" status="test_status" time="42.55">
+        </testcase>
+
+        <testcase assertions="5" classname="test_class_name" name="skipped_test" status="skipped" time="42.55">
+            <skipped message="Test was skipped"/>
+        </testcase>
+
+        <testcase assertions="5" classname="test_class_name" name="error_test" status="error" time="42.55">
+            <error message="Error message" type="error_type"/>
+        </testcase>
+
+        <testcase assertions="5" classname="test_class_name" name="failure_test" status="failure" time="42.55">
+            <failure message="Failure message" type="failure_type"/>
+        </testcase>
+
+        <testcase assertions="5" classname="test_class_name" name="test_name" status="ok_with_system_output" time="42.55">
+            <system-out>Output here</system-out>
+            <system-err>System error output here</system-err>
+        </testcase>
+
+        <system-out>Test suite system output</system-out>
+        <system-err>Test suite system error</system-err>
+    </testsuite>
+
+</testsuites>

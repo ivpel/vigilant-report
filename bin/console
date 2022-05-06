@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+
+<?php
+require __DIR__ . '/../vendor/autoload.php';
+
+use Ivpel\VigilantReporter\Command\GenerateConsoleCommand;
+use Ivpel\VigilantReporter\Command\GenerateHtmlCommand;
+use Symfony\Component\Console\Application;
+
+$app = new Application();
+
+$app->add(new GenerateConsoleCommand());
+$app->add(new GenerateHtmlCommand());
+
+$app->run();
