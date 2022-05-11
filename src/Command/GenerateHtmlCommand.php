@@ -2,11 +2,11 @@
 
 namespace Ivpel\VigilantReporter\Command;
 
+use Ivpel\VigilantReporter\Generator\ReportGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Ivpel\VigilantReporter\Generator;
 
 class GenerateHtmlCommand extends Command
 {
@@ -22,7 +22,7 @@ class GenerateHtmlCommand extends Command
     {
         $output->writeln('Generating report!');
 
-        Generator\ReportGenerator::generate($input->getArgument('name'));
+        ReportGenerator::generateHtmlReport();
         return self::SUCCESS;
     }
 }

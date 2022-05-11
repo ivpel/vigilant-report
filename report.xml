@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites disabled="0" errors="0" failures="0" name="First Suite" tests="3" time="62.46">
+<testsuites disabled="0" assertions="55" warnings="12" skipped="12" errors="0" failures="0" name="First Suite" tests="3" time="62.46">
 
     <testsuite disabled="0" errors="0" failures="0" hostname="test" id="" name="name_test" package="_test_package" skipped="0" tests="4" time="45.55" timestamp="16:22">
         <properties>
@@ -58,7 +58,5 @@
         <system-out>Test suite system output</system-out>
         <system-err>Test suite system error</system-err>
     </testsuite>
-
-
 
 </testsuites>
