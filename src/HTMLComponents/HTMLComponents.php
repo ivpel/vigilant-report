@@ -111,7 +111,7 @@ class HTMLComponents
             '<article class="message is-small">
             <details>
               <summary class="message-header" style="display: flow-root list-item;">
-                 Logging output
+                 System output
               </summary>
               <div class="message-body">
                '. $items->{'system-out'}. '
@@ -178,5 +178,10 @@ class HTMLComponents
     public static function caseStatusWarning(): string
     {
         return '<span class="is-pulled-right has-background-warning has-text-white" style="padding: 0px 30px 0px 30px;border-radius: 5px;">Warning</span>';
+    }
+
+    public static function caseStatusSkipped(): string
+    {
+        return '<span class="is-pulled-right has-background-link-light" style="padding: 0px 30px 0px 30px;border-radius: 5px;">Skipped</span>';
     }
 }
