@@ -22,7 +22,7 @@ class ReportBuilder
     public static function getSummaryReportOverview()
     {
         $xml = self::loader();
-        $total = $xml;
+        $total = $xml->testsuite;
         return HTMLComponents::summaryReportOverviewComponent('ReportName',$total);
     }
 
@@ -43,11 +43,25 @@ class ReportBuilder
     {
         $xml = self::loader();
         $cases = [];
-        foreach ($xml->testsuite as $suite) {
+
+        /**
+         * Parse available test suites (each {name}Test.php file is a test suite)
+         * <testsuites>
+         *      <testsuite>
+         *          <testsuite> as $suite
+         */
+        foreach ($xml->testsuite->testsuite as $suite) {
 
             // Start suite block by insert <div> block which will be container for table with test cases info
             array_push($cases, HTMLComponents::suiteHeaderComponent($suite));
 
+            /**
+             * Each {name}Test.php has test cases inside it which can have different attributes,
+             * child elements, etc. For more details see junit xml format.
+             * <testsuite>
+             *      <testcase>
+             *          ...
+             */
             if (isset($suite->testcase)) {
                 // Inserting <table> tag with head and headers for suite result
                 array_push($cases, HTMLComponents::suiteTableHeadComponent());
@@ -60,12 +74,17 @@ class ReportBuilder
                     if (isset($case->failure)) {
                         array_push($cases, HTMLComponents::caseStatusErrorOrFailure('Failure'));
                         array_push($cases, HTMLComponents::articleFailureComponent($case));
-                    } elseif (isset($case->warning)) {
-                        array_push($cases, HTMLComponents::caseStatusWarning());
-                        array_push($cases, HTMLComponents::articleWarningComponent($case));
-                    } elseif (isset($case->error)) {
+                    }
+                    elseif (isset($case->error)) {
                         array_push($cases, HTMLComponents::caseStatusErrorOrFailure('Error'));
                         array_push($cases, HTMLComponents::articleErrorComponent($case));
+                    }
+                    elseif (isset($case->warning)) {
+                        array_push($cases, HTMLComponents::caseStatusWarning());
+                        array_push($cases, HTMLComponents::articleWarningComponent($case));
+                    }
+                    elseif (isset($case->skipped)) {
+                        array_push($cases, HTMLComponents::caseStatusSkipped());
                     } else {
                         array_push($cases, HTMLComponents::caseStatusOK());
                     }
@@ -93,13 +112,19 @@ class ReportBuilder
                     if (isset($case->failure)) {
                         array_push($cases, HTMLComponents::caseStatusErrorOrFailure('Failure'));
                         array_push($cases, HTMLComponents::articleFailureComponent($case));
-                    } elseif (isset($case->warning)) {
-                        array_push($cases, HTMLComponents::caseStatusWarning());
-                        array_push($cases, HTMLComponents::articleWarningComponent($case));
-                    } elseif (isset($case->error)) {
+                    }
+                    elseif (isset($case->error)) {
                         array_push($cases, HTMLComponents::caseStatusErrorOrFailure('Error'));
                         array_push($cases, HTMLComponents::articleErrorComponent($case));
-                    } else {
+                    }
+                    elseif (isset($case->warning)) {
+                        array_push($cases, HTMLComponents::caseStatusWarning());
+                        array_push($cases, HTMLComponents::articleWarningComponent($case));
+                    }
+                    elseif (isset($case->skipped)) {
+                        array_push($cases, HTMLComponents::caseStatusSkipped());
+                    }
+                    else {
                         array_push($cases, HTMLComponents::caseStatusOK());
                     }
 
