@@ -15,14 +15,23 @@ class GenerateHtmlCommand extends Command
         $this->setName('generate:html-report')
             ->setDescription('Generate report in HTML format based on Junit xml file')
             ->setHelp('This command generate HTML report based on Junit xml file and output it in to the destination')
-            ->addArgument('name', InputArgument::OPTIONAL, 'Add report custom name');
+            ->addArgument(
+                'xml-report-location',
+                InputArgument::REQUIRED,
+                'report.xml location. Where it is located?')
+            ->addArgument(
+                'generated-report-name',
+                InputArgument::OPTIONAL,
+                'Add report custom name');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Generating report!');
+        $xmlReportLocation = $input->getArgument('xml-report-location');
+        $generatedReportName = $input->getArgument('generated-report-name');
 
-        ReportGenerator::generateHtmlReport();
+        $output->writeln('Generating report!');
+        ReportGenerator::generateHtmlReport($xmlReportLocation, $generatedReportName);
         return self::SUCCESS;
     }
 }
