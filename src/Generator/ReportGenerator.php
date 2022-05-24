@@ -7,12 +7,12 @@ use Ivpel\VigilantReporter\Builder\ReportBuilder;
 
 class ReportGenerator
 {
-    public static function generateHtmlReport()
+    public static function generateHtmlReport($reportLocation, $reportName = 'Report')
     {
-        $htmlReportFile = fopen(__DIR__ . '/../../'. ReportBuilder::getFormattedProjectName().'Report'.date("Y-m-d-H:i:s").'.html', 'w');
+        $htmlReportFile = fopen(__DIR__ . '/../../'. ReportBuilder::getFormattedProjectName($reportLocation). $reportName .date("Y-m-d-H:i:s").'.html', 'w');
         fwrite($htmlReportFile, HTMLComponents::pageHeaderComponent());
-        fwrite($htmlReportFile, ReportBuilder::getSummaryReportOverview());
-        foreach (ReportBuilder::getSuiteResults() as $suite) {
+        fwrite($htmlReportFile, ReportBuilder::getSummaryReportOverview($reportLocation));
+        foreach (ReportBuilder::getSuiteResults($reportLocation) as $suite) {
             fwrite($htmlReportFile, $suite);
         }
         fwrite($htmlReportFile, HTMLComponents::pageFooterComponent());

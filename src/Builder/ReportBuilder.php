@@ -6,22 +6,22 @@ use Ivpel\VigilantReporter\HTMLComponents\HTMLComponents;
 
 class ReportBuilder
 {
-    public static function loader()
+    public static function loader($reportLocation)
     {
-        return simplexml_load_file(__DIR__ . '/../../report.xml');
+        return simplexml_load_file(__DIR__ . '/../../' . $reportLocation);
     }
 
-    public static function getFormattedProjectName()
+    public static function getFormattedProjectName($reportLocation): ?string
     {
-        $xml = self::loader();
+        $xml = self::loader($reportLocation);
         $total = $xml->testsuite;
         $projectTestsFullPath = explode('/', $total['name']);
         return array_pop($projectTestsFullPath);
     }
 
-    public static function getSummaryReportOverview()
+    public static function getSummaryReportOverview($reportLocation): string
     {
-        $xml = self::loader();
+        $xml = self::loader($reportLocation);
         $total = $xml->testsuite;
         return HTMLComponents::summaryReportOverviewComponent('ReportName',$total);
     }
@@ -37,11 +37,12 @@ class ReportBuilder
      * As result this methods will return array. When this array will be written to the file layer by layer
      * we will receive HTML structured entity.
      *
+     * @param $reportLocation
      * @return array
      */
-    public static function getSuiteResults()
+    public static function getSuiteResults($reportLocation): array
     {
-        $xml = self::loader();
+        $xml = self::loader($reportLocation);
         $cases = [];
 
         /**
