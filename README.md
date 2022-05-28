@@ -4,7 +4,7 @@
 
 ## Install
 ```shell
-composer require ivpel/vigilant-reporter
+composer require ivpel/vigilant-report
 ```
 
 ## How to use
