@@ -2,7 +2,7 @@
 
 namespace Ivpel\VigilantReporter\Command;
 
-use Ivpel\VigilantReporter\Generator\ReportGenerator;
+use Ivpel\VigilantReporter\Generator\HTMLReportGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +31,7 @@ class GenerateHtmlCommand extends Command
         $generatedReportName = $input->getArgument('generated-report-name');
 
         $output->writeln('Generating report!');
-        ReportGenerator::generateHtmlReport($xmlReportLocation, $generatedReportName);
+        HTMLReportGenerator::generateHtmlReport($xmlReportLocation, $generatedReportName);
         return self::SUCCESS;
     }
 }

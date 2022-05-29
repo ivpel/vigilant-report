@@ -4,7 +4,7 @@ namespace Ivpel\VigilantReporter\Builder;
 
 use Ivpel\VigilantReporter\HTMLComponents\HTMLComponents;
 
-class ReportBuilder
+class HTMLReportBuilder
 {
     public static function loader($reportLocation)
     {
